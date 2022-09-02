@@ -1,0 +1,109 @@
+ext-repos (1.0.9-1) unstable; urgency=medium
+
+  * DEL: "*.gpg" & "*.list" files.
+  * ADD: "postinst" file.
+
+ -- z17 Dev <mail@z17.dev>  Mon, 29 Aug 2022 17:37:00 +0300
+
+ext-repos (1.0.8-5) unstable; urgency=medium
+
+  * UPD: "*.list" & "*.gpg" files.
+
+ -- z17 Dev <mail@z17.dev>  Sun, 28 Aug 2022 16:53:00 +0300
+
+ext-repos (1.0.8-4) unstable; urgency=medium
+
+  * UPD: Pin repository in "percona.pref".
+
+ -- z17 Dev <mail@z17.dev>  Sun, 28 Aug 2022 15:10:00 +0300
+
+ext-repos (1.0.8-3) unstable; urgency=medium
+
+  * ADD: "haproxy.pref".
+
+ -- z17 Dev <mail@z17.dev>  Sun, 28 Aug 2022 14:40:00 +0300
+
+ext-repos (1.0.8-2) unstable; urgency=medium
+
+  * UPD: Rename package.
+
+ -- z17 Dev <mail@z17.dev>  Sun, 28 Aug 2022 01:14:00 +0300
+
+ext-repos (1.0.8-1) unstable; urgency=medium
+
+  * NEW: Debian "haproxy.debian.net" repository.
+
+ -- z17 Dev <mail@z17.dev>  Sat, 27 Aug 2022 13:59:00 +0300
+
+ext-repos (1.0.7-1) unstable; urgency=medium
+
+  * NEW: Debian repositories "debian.backports" & "debian.contrib-non-free".
+
+ -- z17 Dev <mail@z17.dev>  Tue, 23 Aug 2022 13:01:00 +0300
+
+ext-repos (1.0.6-3) unstable; urgency=medium
+
+  * UPD: Disable Elasticsearch repository.
+
+ -- z17 Dev <mail@z17.dev>  Sat, 20 Aug 2022 17:24:00 +0300
+
+ext-repos (1.0.6-2) unstable; urgency=medium
+
+  * UPD: Syncthing repository priority.
+
+ -- z17 Dev <mail@z17.dev>  Sat, 20 Aug 2022 17:18:00 +0300
+
+ext-repos (1.0.6-1) unstable; urgency=medium
+
+  * NEW: XanMod kernel repository.
+
+ -- z17 Dev <mail@z17.dev>  Thu, 18 Aug 2022 00:47:00 +0300
+
+ext-repos (1.0.5-1) unstable; urgency=medium
+
+  * NEW: Syncthing repository.
+  * UPD: Change directory structure.
+
+ -- z17 Dev <mail@z17.dev>  Tue, 16 Aug 2022 23:48:00 +0300
+
+ext-repos (1.0.4-2) unstable; urgency=medium
+
+  * FIX: PostInst script.
+
+ -- z17 Dev <mail@z17.dev>  Tue, 22 Mar 2022 15:05:00 +0300
+
+ext-repos (1.0.4-1) unstable; urgency=medium
+
+  * UPD: All GPG keys & all repos.
+
+ -- z17 Dev <mail@z17.dev>  Tue, 22 Mar 2022 14:55:00 +0300
+
+ext-repos (1.0.3-2) unstable; urgency=medium
+
+  * UPD: PostInst script.
+
+ -- z17 Dev <mail@z17.dev>  Wed, 12 Feb 2020 12:00:00 +0300
+
+ext-repos (1.0.3-1) unstable; urgency=medium
+
+  * FIX: Elasticsearch repository URL.
+
+ -- z17 Dev <mail@z17.dev>  Tue, 11 Feb 2020 16:00:00 +0300
+
+ext-repos (1.0.2-1) unstable; urgency=medium
+
+  * DEL: GPG keys.
+
+ -- z17 Dev <mail@z17.dev>  Tue, 11 Feb 2020 16:00:00 +0300
+
+ext-repos (1.0.1-1) unstable; urgency=medium
+
+  * ADD: GPG keys.
+
+ -- z17 Dev <mail@z17.dev>  Tue, 11 Feb 2020 14:00:00 +0300
+
+ext-repos (1.0.0-1) unstable; urgency=medium
+
+  * Initial Release
+
+ -- z17 Dev <mail@z17.dev>  Tue, 12 Nov 2019 14:00:00 +0300

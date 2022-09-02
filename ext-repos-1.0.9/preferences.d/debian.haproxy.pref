@@ -1,0 +1,3 @@
+Package: haproxy
+Pin: origin haproxy.debian.net
+Pin-Priority: 1001

@@ -1,0 +1,248 @@
+#!/usr/bin/bash -e
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# CONFIGURATION.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+debname="$( lsb_release -cs )"
+sources="/etc/apt/sources.list.d"
+trusted="/etc/apt/trusted.gpg.d"
+store="https://raw.githubusercontent.com/gpgstore"
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# INITIALIZATION.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+init() {
+  debian_backports
+  debian_contrib_non_free
+  debian_haproxy
+  elastic_elasticsearch
+  mariadb
+  mysql
+  percona_mongodb
+  percona_mysql
+  percona_pgsql
+  postgresql
+  sury_php
+  syncthing
+  xanmod_kernel
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# DEBIAN / BACKPORTS.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+debian_backports() {
+  local name="ext.debian.backports"
+
+  cat > "${sources}/${name}.list" <<EOF
+deb http://mirror.yandex.ru/debian ${debname}-backports main contrib non-free
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# DEBIAN / (CONTRIB | NON-FREE).
+# -------------------------------------------------------------------------------------------------------------------- #
+
+debian_contrib_non_free() {
+  local name="ext.debian.contrib-non-free"
+
+  cat > "${sources}/${name}.list" <<EOF
+deb http://mirror.yandex.ru/debian ${debname} contrib non-free
+deb-src http://mirror.yandex.ru/debian ${debname} contrib non-free
+
+deb http://mirror.yandex.ru/debian-security/ ${debname}-security contrib non-free
+deb-src http://mirror.yandex.ru/debian-security/ ${debname}-security contrib non-free
+
+deb http://mirror.yandex.ru/debian ${debname}-updates contrib non-free
+deb-src http://mirror.yandex.ru/debian ${debname}-updates contrib non-free
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# DEBIAN / HAPROXY.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+debian_haproxy() {
+  local name="ext.debian.haproxy"
+  local version="2.6"
+
+  _key_download "${store}/debian/main/apt.debian.haproxy.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+deb [signed-by=${trusted}/${name}.gpg] https://haproxy.debian.net ${debname}-backports-${version} main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# ELASTIC / ELASTICSEARCH.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+elastic_elasticsearch() {
+  local name="ext.elastic"
+  local version="8.x"
+
+  _key_download "${store}/elastic/main/apt.elastic.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+# deb [signed-by=${trusted}/${name}.gpg] https://artifacts.elastic.co/packages/${version}/apt stable main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# MARIADB.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+mariadb() {
+  local name="ext.mariadb"
+  local version="10.9"
+
+  _key_download "${store}/mariadb/main/apt.mariadb.asc" "${name}.asc"
+  cat > "${sources}/${name}.list" <<EOF
+deb https://mirror.netcologne.de/mariadb/repo/${version}/debian ${debname} main
+# deb-src https://mirror.netcologne.de/mariadb/repo/${version}/debian ${debname} main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# MYSQL.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+mysql() {
+  local name="ext.mysql"
+  local version="8.0"
+
+  _key_download "${store}/mysql/main/apt.mysql.asc" "${name}.asc"
+  cat > "${sources}/${name}.list" <<EOF
+deb https://repo.mysql.com/apt/debian/ ${debname} mysql-${version}
+# deb-src https://repo.mysql.com/apt/debian/ ${debname} mysql-${version}
+deb https://repo.mysql.com/apt/debian/ ${debname} mysql-tools
+# deb-src https://repo.mysql.com/apt/debian/ ${debname} mysql-tools
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# PERCONA / MONGODB.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+percona_mongodb() {
+  local name="ext.percona.mongodb"
+  local version="50"
+
+  _key_download "${store}/percona/main/apt.percona.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+deb [signed-by=${trusted}/${name}.gpg] https://repo.percona.com/psmdb-${version}/apt ${debname} main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# PERCONA / MYSQL.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+percona_mysql() {
+  local name="ext.percona.mysql"
+  local version="80"
+
+  _key_download "${store}/percona/main/apt.percona.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+deb [signed-by=${trusted}/${name}.gpg] https://repo.percona.com/ps-${version}/apt ${debname} main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# PERCONA / POSTGRESQL.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+percona_pgsql() {
+  local name="ext.percona.pgsql"
+  local version="14"
+
+  _key_download "${store}/percona/main/apt.percona.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+deb [signed-by=${trusted}/${name}.gpg] https://repo.percona.com/ppg-${version}/apt ${debname} main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# POSTGRESQL.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+postgresql() {
+  local name="ext.postgresql"
+
+  _key_download "${store}/postgresql/main/apt.postgresql.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+deb [signed-by=${trusted}/${name}.gpg] https://apt.postgresql.org/pub/repos/apt ${debname}-pgdg main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# SURY / PHP.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+sury_php() {
+  local name="ext.sury.php"
+
+  _key_download "${store}/sury/main/apt.sury.php.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+deb [signed-by=${trusted}/${name}.gpg] https://packages.sury.org/php ${debname} main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# SYNCTHING.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+syncthing() {
+  local name="ext.syncthing"
+
+  _key_download "${store}/syncthing/main/apt.syncthing.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+deb [signed-by=${trusted}/${name}.gpg] https://apt.syncthing.net syncthing stable
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# XANMOD / KERNEL.
+# -------------------------------------------------------------------------------------------------------------------- #
+
+xanmod_kernel() {
+  local name="ext.xanmod.kernel"
+
+  _key_download "${store}/xanmod/main/apt.xanmod.gpg" "${name}.gpg"
+  cat > "${sources}/${name}.list" <<EOF
+deb [signed-by=${trusted}/${name}.gpg] https://deb.xanmod.org releases main
+EOF
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# ------------------------------------------------< COMMON FUNCTIONS >------------------------------------------------ #
+# -------------------------------------------------------------------------------------------------------------------- #
+
+_key_download() {
+  while getopts "dh" opt; do
+    case ${opt} in
+      d)
+        dearmor=1
+        ;;
+      h|*)
+        echo "-d (dearmor)"
+        exit 2
+        ;;
+    esac
+  done
+
+  shift $(( OPTIND - 1 ))
+
+  echo "--- DOWNLOAD: ${1}"
+  if [[ -n "${dearmor}" ]]; then
+    curl -fsSL "${1}" | gpg --dearmor -o "${trusted}/${2}"
+  else
+    curl -fsSL -o "${trusted}/${2}" "${1}"
+  fi
+}
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# -------------------------------------------------< INIT FUNCTIONS >------------------------------------------------- #
+# -------------------------------------------------------------------------------------------------------------------- #
+
+init "$@"; exit 0

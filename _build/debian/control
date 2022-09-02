@@ -1,0 +1,23 @@
+Source: ext-repos
+Section: admin
+Priority: optional
+Maintainer: z17 Dev <mail@z17.dev>
+Uploaders: z17 Dev <mail@z17.dev>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.1
+Homepage: https://pkgstore.gitlab.io
+Vcs-Browser: https://github.com/pkgstore/linux-deb-ext-repos
+Vcs-Git: https://github.com/pkgstore/linux-deb-ext-repos.git
+Rules-Requires-Root: no
+
+# -------------------------------------------------------------------------------------------------------------------- #
+# Package: ext-repos
+# -------------------------------------------------------------------------------------------------------------------- #
+
+Package: ext-repos
+Architecture: all
+Depends: curl
+        ,lsb-release
+        ,${misc:Depends}
+Description: META-package for install and configure repositories
+ META-package for install and configure repositories.
